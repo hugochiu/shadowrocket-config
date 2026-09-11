@@ -1,0 +1,49 @@
+# Shadowrocket Config
+
+面向中国大陆日常使用的 Shadowrocket 分流配置：国内直连，AI、GitHub、Google、社交和流媒体分别选节点，其余流量默认代理。
+
+## 导入
+
+在 Shadowrocket → 配置 → 添加配置，粘贴：
+
+```text
+https://raw.githubusercontent.com/hugochiu/shadowrocket-config/main/shadowrocket.conf
+```
+
+下载并启用配置，将全局路由设为「配置」。在「手动节点」选择已导入的可用节点；配置不提供节点。随后确认「默认代理」及各服务策略。
+
+- Apple、Microsoft 默认直连；AI、GitHub 等默认跟随「默认代理」。
+- 所有地区组均手动选择，保持出口稳定。地区名称无法匹配的节点仍可在「手动节点」选择。
+- AI 服务可单独选择适用地区的节点；分流不保证节点具备服务访问资格。
+- 没有某地区节点时，不要选择该空组。已保存的客户端选择可能覆盖配置初始值。
+
+## 规则顺序
+
+个人精确例外 → 小范围广告域名 → 服务专属规则 → 国内规则及中国 IP → 默认代理。
+
+广告过滤默认开启，仅列出八个广告平台域名，不加载大型广告库。它不能清除所有广告，也不承诺零误伤；推广链接、奖励广告可能受影响。出现异常时将「广告过滤」切到 `DIRECT` 对比，再按日志添加准确域名例外。此开关只影响本配置中的广告域名。
+
+配置不启用 MITM、脚本或 URL 重写，不修改 STUN 响应，不继承原模板的个人站点和成人内容分组。IPv6 默认关闭。
+
+DNS 使用阿里 DoH。DoH 加密到解析器的传输，不代表所有 DNS 都走代理，也不能保证无污染或无泄漏。中国 IP 兜底需要解析域名，因此没有加 `no-resolve`。未被国内规则或中国 IP 命中的流量会走默认代理。
+
+## 更新与验证
+
+服务规则引用 blackmatrix7 的远程列表，经 jsDelivr 获取；CDN 可能有更新延迟。主文件短不代表展开后的规则少。上游更新可能改变匹配行为，更新后应检查常用服务。
+
+```sh
+python3 scripts/check.py
+```
+
+检查脚本仅使用 Python 标准库和 curl，验证组引用、循环、默认选择、节点过滤、远程列表可下载且内容可识别，以及代表性域名的静态命中。它会下载全部引用列表，网络不可用会失败；它不模拟 Shadowrocket 的 DNS、IP、模块及 SNI 匹配，不替代 iOS 实测。
+
+导入后检查：远程规则加载无错误、国内网站直连、AI/GitHub 使用预期节点、局域网设备可用。遇到异常先看 Shadowrocket 连接日志中的命中规则。
+
+主配置远程更新会覆盖本地修改，长期个人例外应修改仓库中的配置。
+
+## 来源
+
+- 结构参考 [sydneygao/JJ-shadowrocket-config](https://github.com/sydneygao/JJ-shadowrocket-config)，保留 MIT 版权声明。
+- 服务与国内规则：[blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)，通过远程引用使用，规则版权及使用条款以其上游为准。
+
+本仓库不存放节点、机场订阅 URL、密码或证书。
