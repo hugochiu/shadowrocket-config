@@ -21,6 +21,16 @@ for raw in (ROOT / 'shadowrocket.conf').read_text().splitlines():
 
 groups = dict(line.split(' = ', 1) for line in sections['[Proxy Group]'])
 builtins = {'DIRECT', 'REJECT', 'PROXY'}
+
+assert groups['自动节点'].startswith('url-test,'), groups['自动节点']
+assert groups['故障转移'].startswith('fallback,'), groups['故障转移']
+assert 'url=http://www.gstatic.com/generate_204' in groups['自动节点']
+assert 'url=http://www.gstatic.com/generate_204' in groups['故障转移']
+assert 'interval=300' in groups['自动节点'] and 'timeout=5' in groups['自动节点']
+assert 'interval=60' in groups['故障转移'] and 'timeout=5' in groups['故障转移']
+assert groups['默认代理'].startswith('select,自动节点,故障转移,')
+assert 'policy-select-name=自动节点' in groups['默认代理']
+
 edges = {}
 for name, value in groups.items():
     choices = [s for s in value.split(',')[1:] if '=' not in s]
