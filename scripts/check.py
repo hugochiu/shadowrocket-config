@@ -28,8 +28,8 @@ assert 'url=http://www.gstatic.com/generate_204' in groups['自动节点']
 assert 'url=http://www.gstatic.com/generate_204' in groups['故障转移']
 assert 'interval=300' in groups['自动节点'] and 'timeout=5' in groups['自动节点']
 assert 'interval=60' in groups['故障转移'] and 'timeout=5' in groups['故障转移']
-assert groups['默认代理'].startswith('select,自动节点,故障转移,')
-assert 'policy-select-name=自动节点' in groups['默认代理']
+assert groups['默认代理'].startswith('select,故障转移,自动节点,')
+assert 'policy-select-name=故障转移' in groups['默认代理']
 
 edges = {}
 for name, value in groups.items():
