@@ -24,7 +24,7 @@ https://raw.githubusercontent.com/hugochiu/shadowrocket-config/main/shadowrocket
 
 广告过滤默认开启，仅列出八个广告平台域名，不加载大型广告库。它不能清除所有广告，也不承诺零误伤；推广链接、奖励广告可能受影响。出现异常时将「广告过滤」切到 `DIRECT` 对比，再按日志添加准确域名例外。此开关只影响本配置中的广告域名。
 
-配置不启用 MITM、脚本或 URL 重写，不修改 STUN 响应，不继承原模板的个人站点和成人内容分组。IPv6 默认开启。
+配置不启用 MITM、脚本或 URL 重写，不修改 STUN 响应，不继承原模板的个人站点和成人内容分组。IPv6 默认开启，并启用 `prefer-ipv6 = true` 优先使用 IPv6 地址。
 
 DNS 使用阿里 DoH。DoH 加密到解析器的传输，不代表所有 DNS 都走代理，也不能保证无污染或无泄漏。中国 IP 兜底需要解析域名，因此没有加 `no-resolve`。未被国内规则或中国 IP 命中的流量会走默认代理。
 
