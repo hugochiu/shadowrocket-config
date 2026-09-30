@@ -26,7 +26,7 @@ https://raw.githubusercontent.com/hugochiu/shadowrocket-config/main/shadowrocket
 
 配置不启用 MITM、脚本或 URL 重写，不修改 STUN 响应，不继承原模板的个人站点和成人内容分组。IPv6 默认开启，并启用 `prefer-ipv6 = true` 优先使用 IPv6 地址。
 
-DNS 使用阿里 DoH。DoH 加密到解析器的传输，不代表所有 DNS 都走代理，也不能保证无污染或无泄漏。中国 IP 兜底需要解析域名，因此没有加 `no-resolve`。未被国内规则或中国 IP 命中的流量会走默认代理。
+DNS 使用阿里 DoH，DNS 覆写和直连 DNS 均添加 `#no-h3` 禁用 HTTP/3 自动升级，避免部分网络等待后回退至 HTTP/2。此设置保留加密 DNS、IPv6 支持与 IPv6 优先策略；是否改善应用加载需在实际网络中验证。DoH 加密到解析器的传输，不代表所有 DNS 都走代理，也不能保证无污染或无泄漏。中国 IP 兜底需要解析域名，因此没有加 `no-resolve`。未被国内规则或中国 IP 命中的流量会走默认代理。
 
 ## 更新与验证
 
