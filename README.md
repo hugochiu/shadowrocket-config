@@ -1,4 +1,4 @@
-# Shadowrocket Config
+# sr-conf
 
 面向中国大陆日常使用的 Shadowrocket 分流配置：国内直连，AI、GitHub、Google、社交和流媒体分别分流，其余流量默认使用 Shadowrocket 内置 `PROXY` 策略。
 
@@ -7,7 +7,7 @@
 在 Shadowrocket → 配置 → 添加配置，粘贴：
 
 ```text
-https://raw.githubusercontent.com/hugochiu/shadowrocket-config/main/shadowrocket.conf
+https://raw.githubusercontent.com/hugochiu/sr-conf/main/shadowrocket.conf
 ```
 
 下载并启用配置，将全局路由设为「配置」。配置不提供节点，首次使用时在「默认代理」保持 `PROXY`，并开启首页 → 全局路由 → 启用回退。需要固定出口或排障时，可切换到「手动节点」或地区组；需要配置内故障转移或按延迟自动选路时，再切换到对应策略。
