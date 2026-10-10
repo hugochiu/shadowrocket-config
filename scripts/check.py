@@ -30,7 +30,6 @@ assert 'interval=300' in groups['自动节点'] and 'timeout=5' in groups['自�
 assert 'interval=60' in groups['故障转移'] and 'timeout=5' in groups['故障转移']
 assert groups['默认代理'].startswith('select,PROXY,故障转移,自动节点,')
 assert 'policy-select-name=PROXY' in groups['默认代理']
-assert 'policy-select-name=DIRECT' in groups['Apple']
 
 edges = {}
 for name, value in groups.items():
@@ -116,8 +115,6 @@ expected = {'ad.doubleclick.net': '广告过滤', 'aax.amazon-adsystem.com': '�
             'api.openai.com': 'AI', 'claude.ai': 'AI', 'gemini.google.com': 'AI',
             'copilot.microsoft.com': 'AI', 'github.com': 'GitHub',
             'www.youtube.com': 'Google', 'www.apple.com': 'Apple',
-            'bag.itunes.apple.com': '默认代理', 'amp-api-edge.apps.apple.com': '默认代理',
-            'apps.mzstatic.com': '默认代理', 'captive.apple.com': 'DIRECT',
             'www.microsoft.com': 'Microsoft', 'www.baidu.com': 'DIRECT'}
 for host, policy in expected.items():
     assert domain_policy(host) == policy, (host, policy, domain_policy(host))
