@@ -12,7 +12,7 @@ https://raw.githubusercontent.com/hugochiu/shadowrocket-config/main/shadowrocket
 
 下载并启用配置，将全局路由设为「配置」。配置不提供节点，首次使用时在「默认代理」保持 `PROXY`，并开启首页 → 全局路由 → 启用回退。需要固定出口或排障时，可切换到「手动节点」或地区组；需要配置内故障转移或按延迟自动选路时，再切换到对应策略。
 
-- Apple、Microsoft 默认直连；AI、GitHub 等默认跟随「默认代理」。
+- Apple 默认直连，但 App Store 相关的 `itunes.apple.com`、`apps.apple.com`、`mzstatic.com` 优先走「默认代理」；Microsoft 默认直连，AI、GitHub 等默认跟随「默认代理」。
 - 默认 `PROXY` 使用首页当前节点；「启用回退」负责实际连接失败时切换其他可用节点。「故障转移」每 60 秒按可用性切换，「自动节点」每 300 秒按延迟选择，两者都只在手动切换到对应策略时生效。所有地区组和「手动节点」仍保留为人工覆盖。
 - 自动检测使用 `http://www.gstatic.com/generate_204`，只能验证节点到该地址的连通性，不能保证某个 AI、流媒体或其他服务一定具备访问资格。
 - AI 服务可单独选择适用地区的节点；分流不保证节点具备服务访问资格。
@@ -20,7 +20,7 @@ https://raw.githubusercontent.com/hugochiu/shadowrocket-config/main/shadowrocket
 
 ## 规则顺序
 
-个人精确例外 → 小范围广告域名 → 服务专属规则 → 国内规则及中国 IP → 默认代理。
+个人精确例外 → 小范围广告域名 → 服务专属规则（App Store 域名优先于 Apple 大类）→ 国内规则及中国 IP → 默认代理。
 
 广告过滤默认开启，仅列出八个广告平台域名，不加载大型广告库。它不能清除所有广告，也不承诺零误伤；推广链接、奖励广告可能受影响。出现异常时将「广告过滤」切到 `DIRECT` 对比，再按日志添加准确域名例外。此开关只影响本配置中的广告域名。
 
