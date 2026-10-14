@@ -118,7 +118,11 @@ expected = {'ad.doubleclick.net': '广告过滤', 'aax.amazon-adsystem.com': '�
             'www.youtube.com': 'Google', 'www.apple.com': 'Apple',
             'bag.itunes.apple.com': '默认代理', 'amp-api-edge.apps.apple.com': '默认代理',
             'apps.mzstatic.com': '默认代理', 'captive.apple.com': 'DIRECT',
-            'www.microsoft.com': 'Microsoft', 'www.baidu.com': 'DIRECT'}
+            'www.microsoft.com': 'Microsoft', 'www.baidu.com': 'DIRECT',
+            'api6-core-lf.amemv.com': 'DIRECT',
+            'api6-normal-lf.amemv.com': 'DIRECT',
+            'p11-sign.douyinpic.com': 'DIRECT',
+            'ecom-normal-m.ecombdapi.com': 'DIRECT'}
 for host, policy in expected.items():
     assert domain_policy(host) == policy, (host, policy, domain_policy(host))
 for host in ['www.azabu-u.ac.jp', 'www.nichibenren.or.jp', 'www.jungle.cn']:
